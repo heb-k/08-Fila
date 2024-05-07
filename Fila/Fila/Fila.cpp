@@ -1,28 +1,28 @@
 #include <iostream>
 using namespace std;
-
+ 
 // definicao de tipo
 struct NO {
 	int valor;
 	NO* prox;
 };
-
+ 
 NO* inicio = NULL;
 NO* fim = NULL;
-
+ 
 // headers
 void menu();
 void inicializar();
 void insere();
 void remove();
 //--------------------------
-
-
+ 
+ 
 int main()
 {
 	menu();
 }
-
+ 
 void menu()
 {
 	int op = 0;
@@ -34,10 +34,10 @@ void menu()
 		cout << "2 - Inserir elemento \n";
 		cout << "3 - Remover elemento  \n";
 		cout << "4 - Sair \n";
-
+ 
 		cout << "Opcao: ";
 		cin >> op;
-
+ 
 		switch (op)
 		{
 		case 1: inicializar();
@@ -51,15 +51,15 @@ void menu()
 		default:
 			break;
 		}
-
+ 
 		system("pause"); // somente no windows
 	}
 }
-
+ 
 void inicializar()
 {
-
-	// se a lista já possuir elementos
+ 
+	// se a lista jÃ¡ possuir elementos
 	// libera a memoria ocupada
 	NO* aux = inicio;
 	while (aux != NULL) {
@@ -67,14 +67,14 @@ void inicializar()
 		aux = aux->prox;
 		free(paraExcluir);
 	}
-
+ 
 	inicio = NULL;
 	fim = NULL;
 	cout << "Fila inicializada \n";
-
+ 
 }
-
-
+ 
+ 
 void insere()
 {
 	// aloca memoria dinamicamente para o novo elemento
@@ -83,18 +83,30 @@ void insere()
 	{
 		return;
 	}
-
+ 
 	cout << "Digite o elemento: ";
 	cin >> novo->valor;
 	novo->prox = NULL;
-
-
+ 
+	if (inicio == NULL) {
+		inicio = novo;
+		fim = novo;
+	}
+	else {
+		fim->prox = novo;
+		fim = novo;
+	}
 }
-
+ 
 void remove()
 {
-
-
-
+	NO* ex = inicio;
+	if (inicio ==NULL) {
+		cout << "lista vazia" << endl;
+	}
+	else {
+		cout << inicio->valor << endl;
+		inicio = inicio->prox;
+		free(ex);
+	}
 }
-
